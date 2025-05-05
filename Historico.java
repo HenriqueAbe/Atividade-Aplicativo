@@ -18,7 +18,7 @@ public class Historico {
     }
 
     public String toString() {
-        return String.format("%s como %s | %s (%s) | KDA: %s",
+        return String.format("%s | %s | %s (%s) | KDA: %s",
                 resultado, personagem, placar, mapa, kda);
     }
 }

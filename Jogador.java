@@ -17,12 +17,15 @@ public class Jogador {
     public String getNome() {
         return nome;
     }
+
     public String getRank() {
         return rank;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public void setRank(String rank) {
         this.rank = rank;
     }
@@ -57,10 +60,6 @@ public class Jogador {
         }
     }
 
-    public List<Historico> getHistorico() {
-        return new ArrayList<>(historico);
-    }
-
     public void exibirEstatisticas() {
         System.out.println("\n=== ESTATÍSTICAS ===");
         System.out.println("Total de partidas: " + historico.size());
@@ -71,5 +70,5 @@ public class Jogador {
 
         System.out.printf("Vitórias: %d (%.1f%%)\n",
                 vitorias, historico.isEmpty() ? 0 : (vitorias * 100.0 / historico.size()));
-        }
     }
+}

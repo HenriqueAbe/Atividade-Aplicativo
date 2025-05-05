@@ -52,9 +52,10 @@ public class MenuAdministrador {
             scanner.nextLine();
 
             if(numero > 0 && numero <= sistema.getTodosJogador().size()) {
-                editarJogador(numero - 1); // Ajuste para índice zero
+                editarJogador(numero - 1);
             } else {
                 System.out.println("Número inválido!");
+                scanner.nextLine();
             }
         } catch (Exception e) {
             System.out.println("Entrada inválida!");
@@ -91,6 +92,7 @@ public class MenuAdministrador {
 
         if(nome.isEmpty()) {
             System.out.println("Nome não pode ser vazio!");
+            scanner.nextLine();
             return;
         }
 

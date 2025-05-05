@@ -17,8 +17,9 @@ public class Sistema {
         j1.adicionarArma(new ArmaPrincipal("Vandal", 2900));
         j1.adicionarArma(new ArmaSecundaria("Classic", 0));
 
-        Jogador j2 = new Jogador("Jogador2", "Diamond");
+        Jogador j2 = new Jogador("Jogador2", "Diamante");
         j2.adicionarArma(new ArmaPrincipal("Phantom", 2900));
+        j2.adicionarArma(new ArmaSecundaria("Sheriff", 800));
 
         jogadores.add(j1);
         jogadores.add(j2);
