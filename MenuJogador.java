@@ -10,7 +10,7 @@ public class MenuJogador {
     }
 
     public void executar() {
-        System.out.println("\nBem-vindo, " + jogador.getNome() + " (" + jogador.getRank() + ")!");
+        System.out.println("\nBem-vindo, " + jogador.getNome() + " Rank: " + jogador.getRank() + ".");
 
         int opcao;
         do {
