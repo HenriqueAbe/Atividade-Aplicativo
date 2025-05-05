@@ -14,11 +14,18 @@ public class Jogador {
         this.historico = new ArrayList<>();
     }
 
-    // Getters e Setters
-    public String getNome() { return nome; }
-    public String getRank() { return rank; }
-    public void setNome(String nome) { this.nome = nome; }
-    public void setRank(String rank) { this.rank = rank; }
+    public String getNome() {
+        return nome;
+    }
+    public String getRank() {
+        return rank;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
 
     public void adicionarArma(Arma arma) {
         armas.add(arma);

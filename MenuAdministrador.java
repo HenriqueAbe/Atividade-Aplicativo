@@ -21,52 +21,61 @@ public class MenuAdministrador {
         do {
             System.out.println("\n=== MODO ADMIN ===");
             System.out.println("1. Listar jogadores");
-            System.out.println("2. Editar Jogador 1");
-            System.out.println("3. Editar Jogador 2");
-            System.out.println("4. Adicionar novo jogador");
+            System.out.println("2. Editar jogador");
+            System.out.println("3. Adicionar novo jogador");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
 
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao) {
+            switch(opcao) {
                 case 1:
                     listarJogador();
-                    scanner.nextLine();
                     break;
                 case 2:
-                    editarJogador(0);
-                    scanner.nextLine();
+                    editarJogadorDinamico();
                     break;
                 case 3:
-                    editarJogador(1);
-                    scanner.nextLine();
-                    break;
-                case 4:
                     adicionarJogador();
-                    scanner.nextLine();
                     break;
             }
-        } while (opcao != 0);
+        } while(opcao != 0);
+    }
+
+    private void editarJogadorDinamico() {
+        listarJogador();
+        System.out.print("\nDigite o número do jogador para editar: ");
+
+        try {
+            int numero = scanner.nextInt();
+            scanner.nextLine();
+
+            if(numero > 0 && numero <= sistema.getTodosJogador().size()) {
+                editarJogador(numero - 1); // Ajuste para índice zero
+            } else {
+                System.out.println("Número inválido!");
+            }
+        } catch (Exception e) {
+            System.out.println("Entrada inválida!");
+            scanner.nextLine();
+        }
     }
 
     private void editarJogador(int index) {
         Jogador j = sistema.getJogador(index);
-        System.out.println("\nEditando jogador: " + j.getNome() + " (Rank: " + j.getRank() + ")");
+        System.out.println("\nEditando: " + j.getNome() + " (Rank: " + j.getRank() + ")");
 
         System.out.print("Novo nome (atual: " + j.getNome() + "): ");
         String nome = scanner.nextLine();
-        if (!nome.isEmpty()) {
+        if(!nome.isEmpty()) {
             j.setNome(nome);
-            System.out.println("Nome alterado para: " + j.getNome());
         }
 
         System.out.print("Novo rank (atual: " + j.getRank() + "): ");
         String rank = scanner.nextLine();
-        if (!rank.isEmpty()) {
+        if(!rank.isEmpty()) {
             j.setRank(rank);
-            System.out.println("Rank alterado para: " + j.getRank());
         }
 
         System.out.println("\nDados atualizados:");
@@ -75,7 +84,9 @@ public class MenuAdministrador {
     }
 
     private void adicionarJogador() {
-        System.out.print("\nNome do novo jogador: ");
+        System.out.println("\n--- ADICIONAR NOVO JOGADOR ---");
+
+        System.out.print("Nome: ");
         String nome = scanner.nextLine().trim();
 
         if(nome.isEmpty()) {
@@ -83,39 +94,28 @@ public class MenuAdministrador {
             return;
         }
 
-        // Verifica se jogador já existe
-        if(sistema.getTodosJogador().stream().anyMatch(j -> j.getNome().equalsIgnoreCase(nome))) {
-            System.out.println("Já existe um jogador com este nome!");
-            return;
-        }
-
-        System.out.print("Rank inicial: ");
+        System.out.print("Rank: ");
         String rank = scanner.nextLine().trim();
+        rank = rank.isEmpty() ? "Sem rank" : rank;
 
-        if(rank.isEmpty()) {
-            rank = "Sem rank";
+        Jogador novo = new Jogador(nome, rank);
+        if(sistema.adicionarJogador(novo)) {
+            System.out.println("\n✔ Jogador adicionado com sucesso!");
+            System.out.println("Lista atualizada:");
+            listarJogador();
         }
-
-        // Usa o método específico do sistema para adicionar
-        sistema.adicionarJogador(new Jogador(nome, rank));
-
-        // Mostra lista atualizada
-        System.out.println("\n✔ Jogador adicionado com sucesso!");
-        System.out.println("Lista atual de jogadores:");
-        listarJogador();
     }
 
     private void listarJogador() {
+        List<Jogador> jogadores = sistema.getTodosJogador();
         System.out.println("\n=== LISTA DE JOGADORES ===");
-        List<Jogador> todos = sistema.getTodosJogador();
 
-        if(todos.isEmpty()) {
+        if(jogadores.isEmpty()) {
             System.out.println("Nenhum jogador cadastrado.");
         } else {
-            for(int i = 0; i < todos.size(); i++) {
-                Jogador j = todos.get(i);
-                System.out.printf("%d. %s - %s (Partidas: %d)\n",
-                        i+1, j.getNome(), j.getRank(), j.getHistorico().size());
+            for(int i = 0; i < jogadores.size(); i++) {
+                Jogador j = jogadores.get(i);
+                System.out.println((i+1) + ". " + j.getNome() + " - " + j.getRank());
             }
         }
     }

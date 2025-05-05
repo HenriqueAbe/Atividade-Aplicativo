@@ -6,7 +6,6 @@ public class ArmaPrincipal extends Arma {
         this.preco = preco;
     }
 
-    @Override
     public String getTipo() {
         return "Principal | $" + preco;
     }

@@ -26,10 +26,22 @@ public class Sistema {
         System.out.println("Sistema iniciado com " + jogadores.size() + " jogadores padrão.");
     }
 
-    public void adicionarJogador(Jogador novoJogador) {
-        if(novoJogador != null && !novoJogador.getNome().isEmpty()) {
+    public boolean adicionarJogador(Jogador novoJogador) {
+        if(novoJogador == null || novoJogador.getNome().trim().isEmpty()) {
+            System.out.println("Nome do jogador não pode ser vazio!");
+            return false;
+        }
+
+        boolean existe = jogadores.stream()
+                .anyMatch(j -> j.getNome().equalsIgnoreCase(novoJogador.getNome()));
+
+        if(!existe) {
             jogadores.add(novoJogador);
-            System.out.println("[DEBUG] Jogador " + novoJogador.getNome() + " adicionado. Total: " + jogadores.size());
+            System.out.println("[SISTEMA] Jogador " + novoJogador.getNome() + " adicionado. Total: " + jogadores.size());
+            return true;
+        } else {
+            System.out.println("Já existe um jogador com este nome!");
+            return false;
         }
     }
 

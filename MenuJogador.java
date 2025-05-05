@@ -60,7 +60,6 @@ public class MenuJogador {
         jogador.adicionarHistorico(new Historico(resultado, personagem, placar, mapa, kda));
         System.out.println("Partida adicionada com sucesso!");
 
-        // Mostra estatísticas atualizadas
         jogador.exibirEstatisticas();
     }
 }

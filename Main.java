@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -9,12 +10,12 @@ public class Main {
         while(true) {
             System.out.println("\n=== MENU PRINCIPAL ===");
 
-            for(int i = 0; i < sistema.getTodosJogador().size(); i++) {
-                Jogador j = sistema.getJogador(i);
-                System.out.println((i+1) + ". Acessar " + j.getNome() + " (" + j.getRank() + ")");
+            List<Jogador> jogadores = sistema.getTodosJogador();
+            for(int i = 0; i < jogadores.size(); i++) {
+                System.out.println((i+1) + ". Acessar " + jogadores.get(i).getNome());
             }
 
-            System.out.println((sistema.getTodosJogador().size()+1) + ". Modo Administrador");
+            System.out.println((jogadores.size()+1) + ". Modo Administrador");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 

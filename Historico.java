@@ -2,8 +2,8 @@ public class Historico {
     private String resultado;
     private String personagem;
     private String placar;
-    private String mapa;  // Novo campo
-    private String kda;   // Novo campo
+    private String mapa;
+    private String kda;
 
     public Historico(String resultado, String personagem, String placar, String mapa, String kda) {
         this.resultado = resultado;
@@ -13,7 +13,6 @@ public class Historico {
         this.kda = kda;
     }
 
-    // Novo getter para resultado
     public String getResultado() {
         return resultado;
     }
