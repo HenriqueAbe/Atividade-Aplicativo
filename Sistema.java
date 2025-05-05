@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Sistema {
+    private List<Jogador> jogadores;
+    private Administrador admin;
+
+    public Sistema() {
+        this.jogadores = new ArrayList<>();
+        this.admin = new Administrador("admin123");
+    }
+
+    public void carregarDadosIniciais() {
+        jogadores.clear();
+
+        Jogador j1 = new Jogador("Jogador1", "Platina");
+        j1.adicionarArma(new ArmaPrincipal("Vandal", 2900));
+        j1.adicionarArma(new ArmaSecundaria("Classic", 0));
+
+        Jogador j2 = new Jogador("Jogador2", "Diamond");
+        j2.adicionarArma(new ArmaPrincipal("Phantom", 2900));
+
+        jogadores.add(j1);
+        jogadores.add(j2);
+
+        System.out.println("Sistema iniciado com " + jogadores.size() + " jogadores padrão.");
+    }
+
+    public void adicionarJogador(Jogador novoJogador) {
+        if(novoJogador != null && !novoJogador.getNome().isEmpty()) {
+            jogadores.add(novoJogador);
+            System.out.println("[DEBUG] Jogador " + novoJogador.getNome() + " adicionado. Total: " + jogadores.size());
+        }
+    }
+
+    public Jogador getJogador(int index) {
+        if(index >= 0 && index < jogadores.size()) {
+            return jogadores.get(index);
+        }
+        throw new IndexOutOfBoundsException("Índice de jogador inválido");
+    }
+
+    public List<Jogador> getTodosJogador() {
+        return jogadores;
+    }
+
+    public boolean autenticarAdmin(String senha) {
+        return admin.validarSenha(senha);
+    }
+}
