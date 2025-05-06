@@ -10,23 +10,6 @@ public class Sistema {
         this.admin = new Administrador("admin123");
     }
 
-    public void carregarDadosIniciais() {
-        jogadores.clear();
-
-        Jogador j1 = new Jogador("Jogador1", "Platina");
-        j1.adicionarArma(new ArmaPrimaria("Vandal", 510));
-        j1.adicionarArma(new ArmaSecundaria("Classic", 400));
-
-        Jogador j2 = new Jogador("Jogador2", "Diamante");
-        j2.adicionarArma(new ArmaPrimaria("Phantom", 15234));
-        j2.adicionarArma(new ArmaSecundaria("Sheriff", 9110));
-
-        jogadores.add(j1);
-        jogadores.add(j2);
-
-        System.out.println("Sistema iniciado com " + jogadores.size() + " jogadores padrão.");
-    }
-
     public boolean adicionarJogador(Jogador novoJogador) {
         if(novoJogador == null || novoJogador.getNome().trim().isEmpty()) {
             System.out.println("Nome do jogador não pode ser vazio!");

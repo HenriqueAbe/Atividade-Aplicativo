@@ -63,25 +63,47 @@ public class MenuAdministrador {
         }
     }
 
+
     private void editarJogador(int index) {
-        Jogador j = sistema.getJogador(index);
-        System.out.println("\nEditando: " + j.getNome() + " (Rank: " + j.getRank() + ")");
+        int opcao;
 
-        System.out.print("Novo nome (atual: " + j.getNome() + "): ");
-        String nome = scanner.nextLine();
-        if(!nome.isEmpty()) {
-            j.setNome(nome);
-        }
+        do {
+            System.out.println("\nDigite o número da sua edição: ");
+            System.out.println("1. Editar nome");
+            System.out.println("2. Editar rank");
+            System.out.println("0. Voltar");
 
-        System.out.print("Novo rank (atual: " + j.getRank() + "): ");
-        String rank = scanner.nextLine();
-        if(!rank.isEmpty()) {
-            j.setRank(rank);
-        }
+            opcao = scanner.nextInt();
+            scanner.nextLine();
 
-        System.out.println("\nDados atualizados:");
-        System.out.println("Nome: " + j.getNome());
-        System.out.println("Rank: " + j.getRank());
+            switch(opcao) {
+                case 1:
+                    Jogador j = sistema.getJogador(index);
+                    System.out.println("\nEditando nome: " + j.getNome());
+                    System.out.print("Novo nome (atual: " + j.getNome() + "): ");
+                    String nome = scanner.nextLine();
+                    if(!nome.isEmpty()) {
+                        j.setNome(nome);
+                    }
+                    System.out.println("\nDado atualizado: ");
+                    System.out.println("Nome: " + j.getNome());
+                    scanner.nextLine();
+                    break;
+                case 2:
+                    Jogador k = sistema.getJogador(index);
+                    System.out.println("\nEditando rank: " + k.getRank());
+                    System.out.println("Novo rank (atual: " + k.getRank() + "): ");
+                    String rank = scanner.nextLine();
+                    if(!rank.isEmpty()) {
+                        k.setRank(rank);
+                    }
+                    System.out.println("\nDado atualizado: ");
+                    System.out.println("Rank: " + k.getRank());
+                    scanner.nextLine();
+                    break;
+            }
+
+        }while(opcao != 0);
     }
 
     private void adicionarJogador() {

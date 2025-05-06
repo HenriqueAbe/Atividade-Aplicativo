@@ -18,6 +18,7 @@ public class MenuJogador {
             System.out.println("1. Ver perfil atual");
             System.out.println("2. Ver histórico");
             System.out.println("3. Adicionar partida");
+            System.out.println("4. Adicionar arma favorita");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
 
@@ -37,6 +38,9 @@ public class MenuJogador {
                     adicionarPartida();
                     scanner.nextLine();
                     break;
+                case 4:
+                    adicionarArmaFavorita();
+                    scanner.nextLine();
             }
         } while(opcao != 0);
     }
@@ -61,5 +65,20 @@ public class MenuJogador {
         System.out.println("Partida adicionada com sucesso!");
 
         jogador.exibirEstatisticas();
+    }
+
+    private void adicionarArmaFavorita() {
+        System.out.println("Digite o nome da sua arma favorita: ");
+        String armaFavorita = scanner.nextLine();
+        System.out.println("Primária (1), Secundária (2): ");
+        int tipoArma = scanner.nextInt();
+        System.out.println("Digite o número de kills: ");
+        int kill = scanner.nextInt();
+
+        if (tipoArma == 1) {
+            jogador.adicionarArma(new ArmaPrimaria(armaFavorita,kill));
+        } else if (tipoArma == 2) {
+            jogador.adicionarArma(new ArmaSecundaria(armaFavorita,kill));
+        }
     }
 }

@@ -7,11 +7,10 @@ public class Menu {
 
     public Menu() {
         sistema = new Sistema();
-        sistema.carregarDadosIniciais();
         scanner = new Scanner(System.in);
         iniciar();
     }
-
+    
     private void iniciar() {
         while(true) {
             exibirMenuPrincipal();
