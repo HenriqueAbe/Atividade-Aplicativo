@@ -1,15 +1,17 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class MenuJogador {
     private Jogador jogador;
     private Scanner scanner;
 
     public MenuJogador(Jogador jogador, Scanner scanner) {
+
         this.jogador = jogador;
         this.scanner = scanner;
     }
 
-    public void executar() {
+    public void exibirMenuJogador() {
         System.out.println("\nBem-vindo, " + jogador.getNome() + " Rank: " + jogador.getRank() + ".");
 
         int opcao;
@@ -19,6 +21,7 @@ public class MenuJogador {
             System.out.println("2. Ver histórico");
             System.out.println("3. Adicionar partida");
             System.out.println("4. Adicionar arma favorita");
+            System.out.println("5. Editar arma(s) favorita(s)");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
 
@@ -41,6 +44,11 @@ public class MenuJogador {
                 case 4:
                     adicionarArmaFavorita();
                     scanner.nextLine();
+                    break;
+                case 5:
+                    editarArmaDinamico();
+                    scanner.nextLine();
+                    break;
             }
         } while(opcao != 0);
     }
@@ -68,17 +76,69 @@ public class MenuJogador {
     }
 
     private void adicionarArmaFavorita() {
-        System.out.println("Digite o nome da sua arma favorita: ");
+        System.out.print("Digite o nome da sua arma favorita: ");
         String armaFavorita = scanner.nextLine();
-        System.out.println("Primária (1), Secundária (2): ");
+        System.out.print("Primária (1), Secundária (2): ");
         int tipoArma = scanner.nextInt();
-        System.out.println("Digite o número de kills: ");
+        System.out.print("Digite o número de kills: ");
         int kill = scanner.nextInt();
 
         if (tipoArma == 1) {
             jogador.adicionarArma(new ArmaPrimaria(armaFavorita,kill));
         } else if (tipoArma == 2) {
-            jogador.adicionarArma(new ArmaSecundaria(armaFavorita,kill));
+            jogador.adicionarArma(new ArmaSecundaria(armaFavorita, kill));
+        }
+    }
+
+    private void listarArmas() {
+        List<Arma> armas = Jogador.getTodasArmas();
+
+        if (armas.isEmpty()) {
+            System.out.println("Nenhuma arma registrada.");
+        } else {
+            for(int i = 0; i < armas.size(); i++) {
+                System.out.println((i+1) + ". Editar " + armas.get(i).getNome());
+            }
+        }
+    }
+
+    private void editarArmaDinamico() {
+        listarArmas();
+        System.out.print("Digite o número da arma para editar: ");
+
+        try {
+            int numero = scanner.nextInt();
+            scanner.nextLine();
+
+            if (numero > 0 && numero <= Jogador.getTodasArmas().size()) {
+                editarArma(numero - 1);
+            } else {
+                System.out.println("Número inválido!");
+                scanner.nextLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Entrada inválida!");
+            scanner.nextLine();
+        }
+
+    }
+
+    private void editarArma(int index) {
+        int opcao;
+
+        do {
+            System.out.println("\nDigite o número da sua edição: ");
+            System.out.println("1. Editar tipo(Primária ou Secundária");
+            System.out.println("2. Editar kills");
+            System.out.println("0. Voltar");
+
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    Jogador i =
+            }
         }
     }
 }

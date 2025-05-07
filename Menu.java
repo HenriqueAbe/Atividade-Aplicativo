@@ -10,7 +10,7 @@ public class Menu {
         scanner = new Scanner(System.in);
         iniciar();
     }
-    
+
     private void iniciar() {
         while(true) {
             exibirMenuPrincipal();
@@ -43,7 +43,7 @@ public class Menu {
                 new MenuAdministrador(sistema, scanner).executar();
             }
             else if(opcao > 0 && opcao <= sistema.getTodosJogador().size()) {
-                new MenuJogador(sistema.getJogador(opcao-1), scanner).executar();
+                new MenuJogador(sistema.getJogador(opcao-1), scanner).exibirMenuJogador();
             }
             else {
                 System.out.println("Opção inválida!");

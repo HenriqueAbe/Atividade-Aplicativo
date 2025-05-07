@@ -4,13 +4,13 @@ import java.util.List;
 public class Jogador {
     private String nome;
     private String rank;
-    private List<Arma> armas;
-    private List<Historico> historico;
+    private static List<Arma> armas;
+    private final List<Historico> historico;
 
     public Jogador(String nome, String rank) {
         this.nome = nome;
         this.rank = rank;
-        this.armas = new ArrayList<>();
+        armas = new ArrayList<>();
         this.historico = new ArrayList<>();
     }
 
@@ -70,5 +70,9 @@ public class Jogador {
 
         System.out.printf("Vitórias: %d (%.1f%%)\n",
                 vitorias, historico.isEmpty() ? 0 : (vitorias * 100.0 / historico.size()));
+    }
+
+    public static List<Arma> getTodasArmas() {
+        return armas;
     }
 }
