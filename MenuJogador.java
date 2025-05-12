@@ -125,20 +125,61 @@ public class MenuJogador {
 
     private void editarArma(int index) {
         int opcao;
+        Arma arma = Jogador.getTodasArmas().get(index);
 
         do {
-            System.out.println("\nDigite o número da sua edição: ");
-            System.out.println("1. Editar tipo(Primária ou Secundária");
-            System.out.println("2. Editar kills");
+            System.out.println("\nEditando arma: " + arma.toString());
+            System.out.println("1. Alterar tipo (Primária/Secundária)");
+            System.out.println("2. Alterar número de kills");
             System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
 
             opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
                 case 1:
-                    Jogador i =
+                    System.out.print("Novo tipo (1-Primária, 2-Secundária): ");
+                    int novoTipo = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (novoTipo == 1 || novoTipo == 2) {
+                        System.out.print("Número de kills: ");
+                        int kills = scanner.nextInt();
+                        scanner.nextLine();
+
+                        Arma novaArma;
+                        if (novoTipo == 1) {
+                            novaArma = new ArmaPrimaria(arma.getNome(), kills);
+                        } else {
+                            novaArma = new ArmaSecundaria(arma.getNome(), kills);
+                        }
+
+                        Jogador.getTodasArmas().set(index, novaArma);
+                        System.out.println("Tipo da arma atualizado!");
+                    } else {
+                        System.out.println("Tipo inválido!");
+                    }
+                    break;
+                case 2:
+                    System.out.print("Novo número de kills: ");
+                    int novasKills = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (arma instanceof ArmaPrimaria) {
+                        ArmaPrimaria primaria = (ArmaPrimaria) arma;
+                        Jogador.getTodasArmas().set(index, new ArmaPrimaria(arma.getNome(), novasKills));
+                    } else if (arma instanceof ArmaSecundaria) {
+                        ArmaSecundaria secundaria = (ArmaSecundaria) arma;
+                        Jogador.getTodasArmas().set(index, new ArmaSecundaria(arma.getNome(), novasKills));
+                    }
+                    System.out.println("Kills atualizadas!");
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
             }
-        }
+        } while (opcao != 0);
     }
 }
